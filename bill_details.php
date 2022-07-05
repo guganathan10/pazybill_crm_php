@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "select * from cashfree_transactions where bill_id='".$_REQUEST['id']."' order by id desc";
+  $sql = "select webhook_response,order_amount,payment_time,(select phone_num from user where user_id=customer_id) as customer_id,order_status from cashfree_transactions where bill_id='".$_REQUEST['id']."' order by id desc";
   $result = $conn->query($sql);
   function mask_mobile_no($number)
 {

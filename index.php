@@ -107,10 +107,16 @@ if ($conn->connect_error) {
   $row_payment_today_count = $result_payment_today_count -> fetch_assoc();
   $payment_today_count=$row_payment_today_count['amount']; 
   
-  $created_at=explode(" ",$row_payment_recent['created_at']);
-  $timestamp = strtotime($created_at[0]);
-  $new_date = date("d M Y", $timestamp);
-  $new_date = $new_date." ".$created_at[1];
+  if($row_payment_recent['created_at']!='')
+  {
+    $created_at=explode(" ",$row_payment_recent['created_at']);
+    $timestamp = strtotime($created_at[0]);
+    $new_date = date("d M Y", $timestamp);
+    $new_date = $new_date." ".$created_at[1];
+  }else
+  {
+    $new_date='';
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -162,21 +168,37 @@ if ($conn->connect_error) {
                             <div class="card ">
                                 <div class="card-body">
                                     <div class="row">
+                                    <?php if($row_payment_recent['bill_id']!=''){  ?>
                                     <a href="bill_details.php?id=<?php echo $row_payment_recent['bill_id'] ?>">
+                                    <?php } else { ?>
+                                        <a>
+                                    <?php } ?>
                                         <div class="col-md-12">
                                             <?php 
+                                            if($payment_status_recent!='')
+                                            {
                                             if($payment_status_recent==1)
-                                            {  ?>
+                                            { ?>
+                                            
                                                <p class="lead color-theme-1 mb-1 value" style="color:green">₹ <?php setlocale(LC_MONETARY, 'en_IN'); echo money_format('%!i',$payment_recent); ?></p>
                                             
                                                 <?php   }
-                                            else
+                                            else if($payment_status_recent==2)
                                             {
                                                 ?>
-                                                <p class="lead color-theme-1 mb-1 value" style="color:red">₹ <?php setlocale(LC_MONETARY, 'en_IN'); echo money_format('%!i',$payment_recent); ?></p>
+                                                <p class="lead color-theme-1 mb-1 value" style="color:orange">₹ <?php setlocale(LC_MONETARY, 'en_IN'); echo money_format('%!i',$payment_recent); ?></p>
                                             
-                                                <?php  } 
+                                                <?php  } else if($payment_status_recent==3)
+                                                {
                                             ?>
+                                                 <p class="lead color-theme-1 mb-1 value" style="color:black">₹ <?php setlocale(LC_MONETARY, 'en_IN'); echo money_format('%!i',$payment_recent); ?></p>
+                                            <?php } else if($payment_status_recent==0){ ?>
+                                                <p class="lead color-theme-1 mb-1 value" style="color:red">₹ <?php setlocale(LC_MONETARY, 'en_IN'); echo money_format('%!i',$payment_recent); ?></p>
+                                            <?php }else if($payment_status_recent==''){ ?>
+                                                <p class="lead color-theme-1 mb-1 value" style="color:black">No Payment Initiated</p>
+                                                <?php }}else{?>
+                                                    <p class="lead color-theme-1 mb-1 value" style="color:black">No Payment Initiated</p>
+                                                    <?php  } ?>
                                             <p>Bill No: <?php echo $row_payment_recent['bill_no'] ?></p>
                                             <p>Time: <?php echo $new_date?></p>
                                             <p class="mb-0 label text-small"><b>Recent Payment </b></p>
