@@ -29,7 +29,8 @@ if(isset($_POST['account_number']))
     $branchname=$_POST['branch_name'];
     $uuid=gen_uuid();
     $store_id=$_SESSION['store_id'];
-    $sql_bank="insert into store_bank_info (store_id,bank_name,IFSC,branch_name,account_number,account_name,store_bank_id,created_no) values('$store_id','$bankname','$ifsc','$branchname','$accountnumber','$accountname','$uuid',now());";
+    $sql_bank="insert into store_bank_info (store_id,bank_name,IFSC,branch_name,account_number,account_name,store_bank_id,created_on) values('$store_id','$bankname','$ifsc','$branchname','$accountnumber','$accountname','$uuid',now());";
+    echo $sql_bank;
 }
 ?>
 <!DOCTYPE html>
