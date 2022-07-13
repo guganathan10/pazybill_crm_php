@@ -36,7 +36,7 @@ $sql_header = "select * from stores where store_id='".$_SESSION['store_id']."'";
 
 
         <a class="navbar-logo" href="index.php">
-           <img src="<?php echo $profile_pic ?>" width="100px" style="border-radius:0px">
+           <img src="<?php echo $profile_pic ?>" height="50px" style="border-radius:0px">
             <span class="logo-mobile d-block d-xs-none"></span>
         </a>
 
