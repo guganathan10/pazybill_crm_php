@@ -89,7 +89,7 @@ if ($conn->connect_error) {
    ?>
                                     <tr>
                                         <td><?php echo $i++ ?></td>
-                                        <?php if($row['user_id']==''){ ?>
+                                        <?php if($row['bill_no']==''){ ?>
                                         <td><?php  
                                         echo $bill_info['bill_no'];
                                         ?></td>
@@ -109,7 +109,7 @@ if ($conn->connect_error) {
                                             }
                                         } ?>
                                         
-                                        <td><?php echo '₹ '.money_format('%!i', $row['order_amount']); ?></td>
+                                        <td><?php if($row['order_amount']!=''){echo '₹ '.money_format('%!i', $row['order_amount']); } else{ echo '₹ '.money_format('%!i', $bill_info['amt']); }?></td>
                                         <td><?php echo $row['rating'] ?></td>
                                         <?php if($row['order_status']==1 ){ ?>
                                         <td>Paid</td>
