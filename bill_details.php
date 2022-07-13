@@ -102,7 +102,6 @@ $row_bills = $result_bills->fetch_assoc();
                                     <option value="5">5</option>
                                 </select> </p>
                     <?php } ?>
-                   <button class="btn btn-info mb-3" onclick="print()">Print Bill</button>
                     <iframe src="<?php echo $row_bills['bill_uri'] ?>#navpanes=0" width="100%" height="850px" id="frame"></iframe>
                 </div>
                 <div class="col-4">
