@@ -102,8 +102,8 @@ $row_bills = $result_bills->fetch_assoc();
                                     <option value="5">5</option>
                                 </select> </p>
                     <?php } ?>
-                   <button class="btn btn-info mb-3" id="print_button">Print Bill</button>
-                    <iframe src="<?php echo $row_bills['bill_uri'] ?>#toolbar=0&navpanes=0" width="100%" height="850px" id="printf" name="printf"></iframe>
+                   <button class="btn btn-info mb-3" onclick="print()">Print Bill</button>
+                    <iframe src="<?php echo $row_bills['bill_uri'] ?>#navpanes=0" width="100%" height="850px" id="frame"></iframe>
                 </div>
                 <div class="col-4">
                 <h3>Payments</h3>
@@ -187,10 +187,11 @@ $row_bills = $result_bills->fetch_assoc();
     <script src="js/dore.script.js"></script>
     <script src="js/scripts.js"></script>
     <script>
-        $('#print_button').on('click',function(){
-            window.frames["printf"].focus();
-            window.frames["printf"].print();
-        })
+        function print() {
+            var frame = document.getElementById('frame');
+        frame.contentWindow.focus();
+        frame.contentWindow.print();
+    }
         
     </script>
 
